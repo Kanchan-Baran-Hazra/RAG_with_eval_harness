@@ -1,5 +1,6 @@
 docs/
-
+chroma_db/
+qdrant_storage/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
