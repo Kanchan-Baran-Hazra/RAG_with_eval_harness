@@ -1,0 +1,4 @@
+file_name,status,error,pages,latency_sec,sec_per_page,peak_memory_mb,char_count,word_count,tables_detected,pictures_detected,is_empty_extraction,wer,cer
+01_Code_of_Conduct_and_Ethics.pdf,success,,2,41.737,20.869,455.81,3422,373,2,0,False,0.0,0.0
+02_Remote_and_Hybrid_Work_Policy.pdf,success,,2,14.11,7.055,153.58,3546,387,2,0,False,0.0,0.0
+03_Annual_and_Sick_Leave_Policy.pdf,success,,2,44.08,22.04,153.53,3448,382,2,0,False,0.0,0.0
