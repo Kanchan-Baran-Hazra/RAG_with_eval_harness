@@ -1,0 +1,98 @@
+import os
+from typing import List, Optional
+from dotenv import load_dotenv
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, Field
+
+# Import your custom RAG modules (adjust import paths if needed)
+from src.pipeline import _run
+
+load_dotenv()
+
+# Initialize FastAPI app
+app = FastAPI(
+    title="RAG Chat API",
+    description="API for hybrid RAG retrieval, HyDE generation, and conversational QA.",
+    version="1.0.0"
+)
+
+# Enable CORS (so a frontend like React/Next.js or Streamlit can talk to it)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Set to specific frontend origins in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+# --- Request & Response Schemas ---
+class ChatRequest(BaseModel):
+    query: str = Field(..., description="The user's question.", example="What is the monetary gift cap?")
+    # strategy: str = Field("hybrid", description="Retrieval strategy: hybrid, dense, bm25, or hyde.")
+    # top_k: int = Field(3, description="Number of context chunks to retrieve.", ge=1, le=10)
+
+
+class SourceChunk(BaseModel):
+    text: str
+    score: float
+    metadata: dict
+
+
+class ChatResponse(BaseModel):
+    query: str
+    answer: str
+    # strategy: str
+    # retrieved_chunks: List[SourceChunk]
+
+
+# --- API Endpoints ---
+@app.get("/")
+def health_check():
+    return {"status": "healthy", "service": "RAG Chat API"}
+
+
+@app.post("/api/chat", response_model=ChatResponse)
+def chat_endpoint(payload: ChatRequest):
+    try:
+        # if not retriever:
+        #     raise HTTPException(status_code=500, detail="Retriever not initialized.")
+
+        # # 1. Retrieve relevant chunks
+        # hits = retriever.retrieve(payload.query, strategy=payload.strategy, top_k=payload.top_k)
+
+        # 2. Generate RAG answer
+        raw_result = _run(query=payload.query)
+        print(type(raw_result))
+
+        # Handle dict return from generate_rag_answer vs plain str
+        if isinstance(raw_result, dict):
+            answer_text = raw_result.get("answer")
+        else:
+            answer_text = raw_result.get("answer")
+
+        # 3. Format response
+        # formatted_chunks = [
+        #     SourceChunk(
+        #         text=hit.get("text", ""),
+        #         score=hit.get("score", 0.0),
+        #         metadata=hit.get("metadata", {})
+        #     )
+        #     for hit in hits
+        # ]
+
+        return ChatResponse(
+            query=payload.query,
+            answer=answer_text,
+            # strategy=payload.strategy,
+            # retrieved_chunks=formatted_chunks
+        )
+
+    except Exception as e:
+        print(f"Error handling chat request: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+    except Exception as e:
+        print(f"Error handling chat request: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
