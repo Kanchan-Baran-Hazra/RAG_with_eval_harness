@@ -9,8 +9,9 @@ from pydantic import BaseModel, Field
 # Import your retriever & your RAG answer generator (adjust import paths)
 from src.ingestion.chroma_store import VectorDBManager
 from src.retrival.rag_retriever import RAGRetriever
-from src.genrator.rag_generator import generate_rag_answer  # Your RAG generation function
-
+# from src.genrator.rag_generator import generate_rag_answer  # Your RAG generation function
+from src.pipeline import _run
+from evaluation.genrator.gen_html_reporter import generate_gen_html_report
 load_dotenv()
 
 # 1. Multi-Metric Structured Output Schema (All 3 Generation Dimensions in 1 Call)
@@ -131,21 +132,21 @@ def run_generation_eval_pipeline(
 
         # Step B: Run Your RAG Generator (Replace with your actual generator call)
         # Note: If your generator also uses Groq, rate_limiter ensures safe pacing
-        generated_answer = generate_rag_answer(query=query, context_chunks=hits)
+        generated_answer = _run(query=query, strategy=strategy, top_k=top_k)
 
         # Step C: Grade Generation across Faithfulness, Correctness & Relevance
         eval_res = evaluate_generation(
             question=query,
             ground_truth=ground_truth,
             retrieved_context=formatted_context,
-            generated_answer=generated_answer
+            generated_answer=generated_answer.get("answer",None)
         )
 
         record = {
             "id": item_id,
             "question": query,
             "ground_truth": ground_truth,
-            "generated_answer": generated_answer,
+            "generated_answer": generated_answer.get("answer",None),
             "retrieved_hits": hits,
             "evaluation": eval_res.model_dump()
         }
@@ -161,6 +162,10 @@ def run_generation_eval_pipeline(
 
     # Save JSON Report
     Path(output_path).write_text(json.dumps(results_log, indent=2), encoding="utf-8")
+
+    html_path = str(Path(output_path).with_suffix(".html"))
+    data = json.loads(Path(output_path).read_text(encoding="utf-8"))
+    generate_gen_html_report(data, html_path)
 
     # Summary Dashboard
     total = len(results_log)
@@ -183,8 +188,8 @@ def run_generation_eval_pipeline(
 
 if __name__ == "__main__":
     run_generation_eval_pipeline(
-        golden_path="golden.json",
-        output_path="gen_eval_results.json",
+        golden_path=r"eval_dataset/test_gold.json",
+        output_path=r"evaluation/genrator/gen_eval_results.json",
         strategy="hybrid",
         top_k=3
     )
