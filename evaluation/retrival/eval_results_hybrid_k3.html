@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAG Retrieval Evaluation Report</title>
+<style>
+    :root {
+        --bg: #f8fafc;
+        --card-bg: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --border: #e2e8f0;
+        --pass-bg: #dcfce7;
+        --pass-text: #166534;
+        --pass-border: #22c55e;
+        --fail-bg: #fee2e2;
+        --fail-text: #991b1b;
+        --fail-border: #ef4444;
+        --accent: #2563eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        margin: 0;
+        padding: 2rem;
+        line-height: 1.5;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid var(--border);
+        padding-bottom: 1rem;
+    }
+    h1 { margin: 0; font-size: 1.75rem; }
+    .meta-info { color: var(--muted); font-size: 0.9rem; }
+    
+    /* Summary Dashboard */
+    .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .stat-card {
+        background: var(--card-bg);
+        padding: 1.25rem;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .stat-title { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-value { font-size: 1.75rem; font-weight: 700; margin-top: 0.25rem; }
+
+    /* Filter Buttons */
+    .filters { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .filter-btn {
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--border);
+        background: var(--card-bg);
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text);
+    }
+    .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* Evaluation Cards */
+    .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-left: 5px solid var(--border);
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 1.25rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .card.pass { border-left-color: var(--pass-border); }
+    .card.fail { border-left-color: var(--fail-border); }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    .title-group { display: flex; align-items: center; gap: 0.75rem; }
+    .item-id { font-weight: 700; font-size: 1.1rem; }
+    .badge {
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 0.2rem 0.6rem;
+        border-radius: 999px;
+    }
+    .badge.pass { background: var(--pass-bg); color: var(--pass-text); }
+    .badge.fail { background: var(--fail-bg); color: var(--fail-text); }
+    .score-pill {
+        font-weight: 700;
+        padding: 0.3rem 0.75rem;
+        border-radius: 6px;
+        background: #f1f5f9;
+    }
+
+    .label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.35rem;
+    }
+    .question-box {
+        background: #f8fafc;
+        padding: 0.85rem 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        border: 1px solid var(--border);
+    }
+    .question-box p { margin: 0; font-weight: 600; }
+
+    .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+    @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+    .panel {
+        background: #fafafa;
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+    }
+    .panel p { margin: 0; font-size: 0.95rem; }
+
+    .missing-box {
+        margin-top: 0.75rem;
+        padding: 0.65rem;
+        background: #fff1f2;
+        border: 1px solid #fecdd3;
+        border-radius: 6px;
+        font-size: 0.88rem;
+        color: #9f1239;
+    }
+    .missing-box ul { margin: 0.35rem 0 0 1.2rem; padding: 0; }
+
+    /* Collapsible Chunks */
+    details {
+        border-top: 1px solid var(--border);
+        padding-top: 0.75rem;
+    }
+    summary {
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--accent);
+        user-select: none;
+    }
+    .chunks-container { margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .chunk-item {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    .chunk-header {
+        background: #f1f5f9;
+        padding: 0.4rem 0.75rem;
+        font-size: 0.8rem;
+        display: flex;
+        gap: 1rem;
+        border-bottom: 1px solid var(--border);
+    }
+    .chunk-rank { font-weight: 700; }
+    .chunk-score { color: #0369a1; font-weight: 600; }
+    .chunk-meta { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .chunk-text {
+        margin: 0;
+        padding: 0.75rem;
+        white-space: pre-wrap;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.85rem;
+        background: #ffffff;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div>
+            <h1>RAG Retrieval Evaluation Report</h1>
+            <div class="meta-info">Strategy: <strong>hybrid</strong> | Top-K: <strong>3</strong></div>
+        </div>
+        <div class="meta-info">Generated: 2026-11-16 21:58:58</div>
+    </header>
+
+    <div class="summary-grid">
+        <div class="stat-card">
+            <div class="stat-title">Total Queries</div>
+            <div class="stat-value">5</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">Average Score</div>
+            <div class="stat-value">4.20 / 5.0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">Pass Rate</div>
+            <div class="stat-value" style="color: #16a34a;">80.0%</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">Passed / Failed</div>
+            <div class="stat-value">4 / 1</div>
+        </div>
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active" onclick="filterCards('all', this)">All (5)</button>
+        <button class="filter-btn" onclick="filterCards('pass', this)">Passed (4)</button>
+        <button class="filter-btn" onclick="filterCards('fail', this)">Failed (1)</button>
+    </div>
+
+    <div id="cards-list">
+        
+        <div class="card pass" data-status="pass">
+            <div class="card-header">
+                <div class="title-group">
+                    <span class="item-id">GD-01</span>
+                    <span class="badge pass">SUPPORTED</span>
+                </div>
+                <div class="score-pill score-5">Score: 5 / 5</div>
+            </div>
+
+            <div class="question-box">
+                <span class="label">Question</span>
+                <p>What is the maximum monetary gift cap under the conflict of interest disclosure rules in the Code of Conduct and Ethics?</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="panel">
+                    <span class="label">Ground Truth (Golden)</span>
+                    <p class="gt-text">The conflict of interest disclosure rule enforces a $50 gift cap.</p>
+                </div>
+                <div class="panel">
+                    <span class="label">Judge Reasoning</span>
+                    <p class="reason-text">The context explicitly states the conflict of interest disclosure rule includes a $50 gift cap.</p>
+                    
+                </div>
+            </div>
+
+            <details >
+                <summary>Retrieved Context (3 chunks)</summary>
+                <div class="chunks-container">
+                    
+                <div class="chunk-item">
+                    <div class="chunk-header">
+                        <span class="chunk-rank">Rank #1</span>
+                        <span class="chunk-score">Score: 0.03175</span>
+                        <span class="chunk-meta" title="{&quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;chunk_index&quot;: 1, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;}">Metadata: {&quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;chunk_index&quot;: 1, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;}</span>
+                    </div>
+                    <pre class="chunk-text">## 1. Purpose &amp;amp; Executive Mandate  
+This policy establishes binding operational, legal, and behavioral standards for Code of Conduct and Ethics across all ApexNova Technologies offices, engineering hubs, and remote work environments. Adherence protects organizational integrity, customer trust, and regulatory compliance.  
+Core Policy Summary: Zero-tolerance harassment, workplace respect, conflict of interest disclosure ($50 gift cap), and anonymous ethics hotline escalation within 48 hours.</pre>
+                </div>
+                
+                <div class="chunk-item">
+                    <div class="chunk-header">
+                        <span class="chunk-rank">Rank #2</span>
+                        <span class="chunk-score">Score: 0.03154</span>
+                        <span class="chunk-meta" title="{&quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;chunk_index&quot;: 5, &quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;, &quot;department&quot;: &quot;HR&quot;}">Metadata: {&quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;chunk_index&quot;: 5, &quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;, &quot;department&quot;: &quot;HR&quot;}</span>
+                    </div>
+                    <pre class="chunk-text">## 4. Non-Compliance &amp;amp; Enforcement  
+Violations of POL-HR-001 (Code of Conduct and Ethics) are investigated objectively by HR &amp;amp; Governance in coordination with Legal Counsel. Confirmed breaches result in corrective coaching, access revocation, formal written warnings, or termination of employment/contract depending on severity and intent.  
+Document Control: POL-HR-001 · ApexNova Technologies Enterprise Policy Corpus (Document 01 of 25) · Classification: Internal Reference Dataset</pre>
+                </div>
+                
+                <div class="chunk-item">
+                    <div class="chunk-header">
+                        <span class="chunk-rank">Rank #3</span>
+                        <span class="chunk-score">Score: 0.03154</span>
+                        <span class="chunk-meta" title="{&quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;chunk_index&quot;: 3}">Metadata: {&quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;chunk_index&quot;: 3}</span>
+                    </div>
+                    <pre class="chunk-text">## 3. Operational Rules, Thresholds &amp;amp; SLAs  
+| Control Area         | Mandatory Requirement                                                                                                                                  | SLA / Enforcement Metric          |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
+| Primary Rule         | Zero-tolerance harassment, workplace respect, conflict of interest disclosure ($50 gift cap), and anonymous ethics hotline escalation within 48 hours. | 100% compliance audited quarterly |</pre>
+                </div>
+                
+                </div>
+            </details>
+        </div>
+        
+        <div class="card pass" data-status="pass">
+            <div class="card-header">
+                <div class="title-group">
+                    <span class="item-id">GD-02</span>
+                    <span class="badge pass">SUPPORTED</span>
+                </div>
+                <div class="score-pill score-5">Score: 5 / 5</div>
+            </div>
+
+            <div class="question-box">
+                <span class="label">Question</span>
+                <p>Within how many hours must an issue be escalated to the anonymous ethics hotline under POL-HR-001?</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="panel">
+                    <span class="label">Ground Truth (Golden)</span>
+                    <p class="gt-text">Escalations to the anonymous ethics hotline must occur within 48 hours.</p>
+                </div>
+                <div class="panel">
+                    <span class="label">Judge Reasoning</span>
+                    <p class="reason-text">Chunk 1 explicitly states that anonymous ethics hotline escalation must occur within 48 hours, matching the ground truth.</p>
+                    
+                </div>
+            </div>
+
+            <details >
+                <summary>Retrieved Context (3 chunks)</summary>
+                <div class="chunks-container">
+                    
+                <div class="chunk-item">
+                    <div class="chunk-header">
+                        <span class="chunk-rank">Rank #1</span>
+                        <span class="chunk-score">Score: 0.03175</span>
+                        <span class="chunk-meta" title="{&quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;, &quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;chunk_index&quot;: 1, &quot;chunk_strategy&quot;: &quot;markdown&quot;}">Metadata: {&quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;, &quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;chunk_index&quot;: 1, &quot;chunk_strategy&quot;: &quot;markdown&quot;}</span>
+                    </div>
+                    <pre class="chunk-text">## 1. Purpose &amp;amp; Executive Mandate  
+This policy establishes binding operational, legal, and behavioral standards for Code of Conduct and Ethics across all ApexNova Technologies offices, engineering hubs, and remote work environments. Adherence protects organizational integrity, customer trust, and regulatory compliance.  
+Core Policy Summary: Zero-tolerance harassment, workplace respect, conflict of interest disclosure ($50 gift cap), and anonymous ethics hotline escalation within 48 hours.</pre>
+                </div>
+                
+                <div class="chunk-item">
+                    <div class="chunk-header">
+                        <span class="chunk-rank">Rank #2</span>
+                        <span class="chunk-score">Score: 0.03154</span>
+                        <span class="chunk-meta" title="{&quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;chunk_index&quot;: 5, &quot;chunk_strategy&quot;: &quot;markdown&quot;}">Metadata: {&quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;chunk_index&quot;: 5, &quot;chunk_strategy&quot;: &quot;markdown&quot;}</span>
+                    </div>
+                    <pre class="chunk-text">## 4. Non-Compliance &amp;amp; Enforcement  
+Violations of POL-HR-001 (Code of Conduct and Ethics) are investigated objectively by HR &amp;amp; Governance in coordination with Legal Counsel. Confirmed breaches result in corrective coaching, access revocation, formal written warnings, or termination of employment/contract depending on severity and intent.  
+Document Control: POL-HR-001 · ApexNova Technologies Enterprise Policy Corpus (Document 01 of 25) · Classification: Internal Reference Dataset</pre>
+                </div>
+                
+                <div class="chunk-item">
+                    <div class="chunk-header">
+                        <span class="chunk-rank">Rank #3</span>
+                        <span class="chunk-score">Score: 0.03089</span>
+                        <span class="chunk-meta" title="{&quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;, &quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;chunk_index&quot;: 3, &quot;department&quot;: &quot;HR&quot;, &quot;chunk_strategy&quot;: &quot;markdown&quot;}">Metadata: {&quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;, &quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;chunk_index&quot;: 3, &quot;department&quot;: &quot;HR&quot;, &quot;chunk_strategy&quot;: &quot;markdown&quot;}</span>
+                    </div>
+                    <pre class="chunk-text">## 3. Operational Rules, Thresholds &amp;amp; SLAs  
+| Control Area         | Mandatory Requirement                                                                                                                                  | SLA / Enforcement Metric          |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
+| Primary Rule         | Zero-tolerance harassment, workplace respect, conflict of interest disclosure ($50 gift cap), and anonymous ethics hotline escalation within 48 hours. | 100% compliance audited quarterly |</pre>
+                </div>
+                
+                </div>
+            </details>
+        </div>
+        
+        <div class="card fail" data-status="fail">
+            <div class="card-header">
+                <div class="title-group">
+                    <span class="item-id">GD-03</span>
+                    <span class="badge fail">UNSUPPORTED</span>
+                </div>
+                <div class="score-pill score-1">Score: 1 / 5</div>
+            </div>
+
+            <div class="question-box">
+                <span class="label">Question</span>
+                <p>Which department owns and maintains the Code of Conduct and Ethics policy?</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="panel">
+                    <span class="label">Ground Truth (Golden)</span>
+                    <p class="gt-text">The HR &amp; Governance leadership team owns, maintains, reviews exceptions quarterly, and publishes updates for the Code of Conduct and Ethics policy.</p>
+                </div>
+                <div class="panel">
+                    <span class="label">Judge Reasoning</span>
+                    <p class="reason-text">The context mentions HR &amp; Governance involvement and an annual review cycle, but does not state that the leadership team owns, maintains, reviews exceptions quarterly, or publishes updates for the policy.</p>
+                    
+                </div>
+            </div>
+
+            <details open>
+                <summary>Retrieved Context (3 chunks)</summary>
+                <div class="chunks-container">
+                    
+                <div class="chunk-item">
+                    <div class="chunk-header">
+                        <span class="chunk-rank">Rank #1</span>
+                        <span class="chunk-score">Score: 0.03227</span>
+                        <span class="chunk-meta" title="{&quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;chunk_index&quot;: 5, &quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;, &quot;department&quot;: &quot;HR&quot;}">Metadata: {&quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;chunk_index&quot;: 5, &quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;, &quot;department&quot;: &quot;HR&quot;}</span>
+                    </div>
+                    <pre class="chunk-text">## 4. Non-Compliance &amp;amp; Enforcement  
+Violations of POL-HR-001 (Code of Conduct and Ethics) are investigated objectively by HR &amp;amp; Governance in coordination with Legal Counsel. Confirmed breaches result in corrective coaching, access revocation, formal written warnings, or termination of employment/contract depending on severity and intent.  
+Document Control: POL-HR-001 · ApexNova Technologies Enterprise Policy Corpus (Document 01 of 25) · Classification: Internal Reference Dataset</pre>
+                </div>
+                
+                <div class="chunk-item">
+                    <div class="chunk-header">
+                        <span class="chunk-rank">Rank #2</span>
+                        <span class="chunk-score">Score: 0.03227</span>
+                        <span class="chunk-meta" title="{&quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;chunk_index&quot;: 0, &quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;}">Metadata: {&quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;chunk_index&quot;: 0, &quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;}</span>
+                    </div>
+                    <pre class="chunk-text">## Code of Conduct and Ethics  
+Enterprise Governance &amp;amp; Operational Standard - RAG Corpus Document #01  
+| Policy ID     | POL-HR-001                                    | Effective Date   | January 15, 2026              |
+|---------------|-----------------------------------------------|------------------|-------------------------------|
+| Department    | HR &amp; Governance                               | Review Cycle     | Annual (Mandatory Audit)      |
+| Applicability | All Full-Time, Part-Time &amp; Contract Personnel | Compliance Tier  | Mandatory Enterprise Standard |</pre>
+                </div>
+                
+                <div class="chunk-item">
+                    <div class="chunk-header">
+                        <span class="chunk-rank">Rank #3</span>
+                        <span class="chunk-score">Score: 0.03226</span>
+                        <span class="chunk-meta" title="{&quot;chunk_index&quot;: 1, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;, &quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;}">Metadata: {&quot;chunk_index&quot;: 1, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;, &quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;}</span>
+                    </div>
+                    <pre class="chunk-text">## 1. Purpose &amp;amp; Executive Mandate  
+This policy establishes binding operational, legal, and behavioral standards for Code of Conduct and Ethics across all ApexNova Technologies offices, engineering hubs, and remote work environments. Adherence protects organizational integrity, customer trust, and regulatory compliance.  
+Core Policy Summary: Zero-tolerance harassment, workplace respect, conflict of interest disclosure ($50 gift cap), and anonymous ethics hotline escalation within 48 hours.</pre>
+                </div>
+                
+                </div>
+            </details>
+        </div>
+        
+        <div class="card pass" data-status="pass">
+            <div class="card-header">
+                <div class="title-group">
+                    <span class="item-id">GD-04</span>
+                    <span class="badge pass">SUPPORTED</span>
+                </div>
+                <div class="score-pill score-5">Score: 5 / 5</div>
+            </div>
+
+            <div class="question-box">
+                <span class="label">Question</span>
+                <p>Which days of the week are hybrid staff required to attend the hub under the Remote and Hybrid Work Policy?</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="panel">
+                    <span class="label">Ground Truth (Golden)</span>
+                    <p class="gt-text">Hybrid staff are required to attend the hub 3 days per week from Tuesday to Thursday (Tue-Thu).</p>
+                </div>
+                <div class="panel">
+                    <span class="label">Judge Reasoning</span>
+                    <p class="reason-text">Chunk 1 explicitly states a standard 3‑day hub attendance (Tue‑Thu) for hybrid staff, matching the ground truth.</p>
+                    
+                </div>
+            </div>
+
+            <details >
+                <summary>Retrieved Context (3 chunks)</summary>
+                <div class="chunks-container">
+                    
+                <div class="chunk-item">
+                    <div class="chunk-header">
+                        <span class="chunk-rank">Rank #1</span>
+                        <span class="chunk-score">Score: 0.03279</span>
+                        <span class="chunk-meta" title="{&quot;doc_hash&quot;: &quot;d4569b9c0ab47978&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;chunk_index&quot;: 1, &quot;source_file&quot;: &quot;02_Remote_and_Hybrid_Work_Policy.pdf&quot;, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;doc_uuid&quot;: &quot;8f29ec4e-f316-2d66-c02d-afe0420c950f&quot;}">Metadata: {&quot;doc_hash&quot;: &quot;d4569b9c0ab47978&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;chunk_index&quot;: 1, &quot;source_file&quot;: &quot;02_Remote_and_Hybrid_Work_Policy.pdf&quot;, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;doc_uuid&quot;: &quot;8f29ec4e-f316-2d66-c02d-afe0420c950f&quot;}</span>
+                    </div>
+                    <pre class="chunk-text">## 1. Purpose &amp;amp; Executive Mandate  
+This policy establishes binding operational, legal, and behavioral standards for Remote and Hybrid Work Policy across all ApexNova Technologies offices, engineering hubs, and remote work environments. Adherence protects organizational integrity, customer trust, and regulatory compliance.  
+Core Policy Summary: Standard 3-day hub attendance (Tue-Thu) for hybrid staff, &amp;gt;=50 Mbps home internet requirement for remote staff, and core collaboration hours from 10:00 AM to 4:00 PM.</pre>
+                </div>
+                
+                <div class="chunk-item">
+                    <div class="chunk-header">
+                        <span class="chunk-rank">Rank #2</span>
+                        <span class="chunk-score">Score: 0.03105</span>
+                        <span class="chunk-meta" title="{&quot;doc_hash&quot;: &quot;d4569b9c0ab47978&quot;, &quot;source_file&quot;: &quot;02_Remote_and_Hybrid_Work_Policy.pdf&quot;, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;doc_uuid&quot;: &quot;8f29ec4e-f316-2d66-c02d-afe0420c950f&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;chunk_index&quot;: 0}">Metadata: {&quot;doc_hash&quot;: &quot;d4569b9c0ab47978&quot;, &quot;source_file&quot;: &quot;02_Remote_and_Hybrid_Work_Policy.pdf&quot;, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;doc_uuid&quot;: &quot;8f29ec4e-f316-2d66-c02d-afe0420c950f&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;chunk_index&quot;: 0}</span>
+                    </div>
+                    <pre class="chunk-text">## Remote and Hybrid Work Policy  
+Enterprise Governance &amp;amp; Operational Standard - RAG Corpus Document #02  
+| Policy ID     | POL-HR-002                                    | Effective Date   | January 15, 2026              |
+|---------------|-----------------------------------------------|------------------|-------------------------------|
+| Department    | HR &amp; Operations                               | Review Cycle     | Annual (Mandatory Audit)      |
+| Applicability | All Full-Time, Part-Time &amp; Contract Personnel | Compliance Tier  | Mandatory Enterprise Standard |</pre>
+                </div>
+                
+                <div class="chunk-item">
+                    <div class="chunk-header">
+                        <span class="chunk-rank">Rank #3</span>
+                        <span class="chunk-score">Score: 0.03102</span>
+                        <span class="chunk-meta" title="{&quot;chunk_index&quot;: 4, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;doc_hash&quot;: &quot;d4569b9c0ab47978&quot;, &quot;doc_uuid&quot;: &quot;8f29ec4e-f316-2d66-c02d-afe0420c950f&quot;, &quot;source_file&quot;: &quot;02_Remote_and_Hybrid_Work_Policy.pdf&quot;}">Metadata: {&quot;chunk_index&quot;: 4, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;doc_hash&quot;: &quot;d4569b9c0ab47978&quot;, &quot;doc_uuid&quot;: &quot;8f29ec4e-f316-2d66-c02d-afe0420c950f&quot;, &quot;source_file&quot;: &quot;02_Remote_and_Hybrid_Work_Policy.pdf&quot;}</span>
+                    </div>
+                    <pre class="chunk-text">## 4. Non-Compliance &amp;amp; Enforcement  
+Violations of POL-HR-002 (Remote and Hybrid Work Policy) are investigated objectively by HR &amp;amp; Operations in coordination with Legal Counsel. Confirmed breaches result in corrective coaching, access revocation, formal written warnings, or termination of employment/contract depending on severity and intent.  
+Document Control: POL-HR-002 · ApexNova Technologies Enterprise Policy Corpus (Document 02 of 25) · Classification: Internal Reference Dataset</pre>
+                </div>
+                
+                </div>
+            </details>
+        </div>
+        
+        <div class="card pass" data-status="pass">
+            <div class="card-header">
+                <div class="title-group">
+                    <span class="item-id">GD-05</span>
+                    <span class="badge pass">SUPPORTED</span>
+                </div>
+                <div class="score-pill score-5">Score: 5 / 5</div>
+            </div>
+
+            <div class="question-box">
+                <span class="label">Question</span>
+                <p>What is the minimum home internet speed required for remote staff at ApexNova Technologies?</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="panel">
+                    <span class="label">Ground Truth (Golden)</span>
+                    <p class="gt-text">Remote staff are required to have a home internet speed of at least 50 Mbps (&gt;=50 Mbps).</p>
+                </div>
+                <div class="panel">
+                    <span class="label">Judge Reasoning</span>
+                    <p class="reason-text">Both Chunk 1 and Chunk 2 explicitly state a &gt;=50 Mbps home internet requirement for remote staff.</p>
+                    
+                </div>
+            </div>
+
+            <details >
+                <summary>Retrieved Context (3 chunks)</summary>
+                <div class="chunks-container">
+                    
+                <div class="chunk-item">
+                    <div class="chunk-header">
+                        <span class="chunk-rank">Rank #1</span>
+                        <span class="chunk-score">Score: 0.03279</span>
+                        <span class="chunk-meta" title="{&quot;chunk_index&quot;: 1, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;source_file&quot;: &quot;02_Remote_and_Hybrid_Work_Policy.pdf&quot;, &quot;doc_uuid&quot;: &quot;8f29ec4e-f316-2d66-c02d-afe0420c950f&quot;, &quot;doc_hash&quot;: &quot;d4569b9c0ab47978&quot;}">Metadata: {&quot;chunk_index&quot;: 1, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;source_file&quot;: &quot;02_Remote_and_Hybrid_Work_Policy.pdf&quot;, &quot;doc_uuid&quot;: &quot;8f29ec4e-f316-2d66-c02d-afe0420c950f&quot;, &quot;doc_hash&quot;: &quot;d4569b9c0ab47978&quot;}</span>
+                    </div>
+                    <pre class="chunk-text">## 1. Purpose &amp;amp; Executive Mandate  
+This policy establishes binding operational, legal, and behavioral standards for Remote and Hybrid Work Policy across all ApexNova Technologies offices, engineering hubs, and remote work environments. Adherence protects organizational integrity, customer trust, and regulatory compliance.  
+Core Policy Summary: Standard 3-day hub attendance (Tue-Thu) for hybrid staff, &amp;gt;=50 Mbps home internet requirement for remote staff, and core collaboration hours from 10:00 AM to 4:00 PM.</pre>
+                </div>
+                
+                <div class="chunk-item">
+                    <div class="chunk-header">
+                        <span class="chunk-rank">Rank #2</span>
+                        <span class="chunk-score">Score: 0.03175</span>
+                        <span class="chunk-meta" title="{&quot;doc_hash&quot;: &quot;d4569b9c0ab47978&quot;, &quot;source_file&quot;: &quot;02_Remote_and_Hybrid_Work_Policy.pdf&quot;, &quot;chunk_index&quot;: 3, &quot;doc_uuid&quot;: &quot;8f29ec4e-f316-2d66-c02d-afe0420c950f&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;chunk_strategy&quot;: &quot;markdown&quot;}">Metadata: {&quot;doc_hash&quot;: &quot;d4569b9c0ab47978&quot;, &quot;source_file&quot;: &quot;02_Remote_and_Hybrid_Work_Policy.pdf&quot;, &quot;chunk_index&quot;: 3, &quot;doc_uuid&quot;: &quot;8f29ec4e-f316-2d66-c02d-afe0420c950f&quot;, &quot;department&quot;: &quot;HR&quot;, &quot;chunk_strategy&quot;: &quot;markdown&quot;}</span>
+                    </div>
+                    <pre class="chunk-text">## 3. Operational Rules, Thresholds &amp;amp; SLAs  
+| Control Area         | Mandatory Requirement                                                                                                                                                  | SLA / Enforcement Metric          |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
+| Primary Rule         | Standard 3-day hub attendance (Tue-Thu) for hybrid staff, &gt;=50 Mbps home internet requirement for remote staff, and core collaboration hours from 10:00 AM to 4:00 PM. | 100% compliance audited quarterly |</pre>
+                </div>
+                
+                <div class="chunk-item">
+                    <div class="chunk-header">
+                        <span class="chunk-rank">Rank #3</span>
+                        <span class="chunk-score">Score: 0.03126</span>
+                        <span class="chunk-meta" title="{&quot;department&quot;: &quot;HR&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;chunk_index&quot;: 4}">Metadata: {&quot;department&quot;: &quot;HR&quot;, &quot;doc_hash&quot;: &quot;ca3402dc605ab086&quot;, &quot;chunk_strategy&quot;: &quot;markdown&quot;, &quot;source_file&quot;: &quot;01_Code_of_Conduct_and_Ethics.pdf&quot;, &quot;doc_uuid&quot;: &quot;06ab7bcc-6d5f-6151-7f62-e8a7a8587d50&quot;, &quot;chunk_index&quot;: 4}</span>
+                    </div>
+                    <pre class="chunk-text">| Exception Approval   | Written waiver required from Department VP and Legal/Compliance prior to deviation.                                                                    | 5 business days review SLA        |
+| Record Retention     | All approvals, audit logs, and signed attestations stored in immutable compliance repository.                                                          | Retained for minimum 7 years      |
+| Violation Escalation | Suspected breaches reported via Ethics Portal or departmental escalation queue.                                                                        | Initial triage within 24 hours    |</pre>
+                </div>
+                
+                </div>
+            </details>
+        </div>
+        
+    </div>
+</div>
+
+<script>
+function filterCards(status, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.card').forEach(card => {
+        if (status === 'all' || card.dataset.status === status) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+</script>
+</body>
+</html>

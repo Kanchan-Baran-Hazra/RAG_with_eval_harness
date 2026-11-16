@@ -1,0 +1,614 @@
+[
+  {
+    "id": "GD-01",
+    "query_type": "single_hop_factual",
+    "question": "What is the maximum monetary gift cap under the conflict of interest disclosure rules in the Code of Conduct and Ethics?",
+    "ground_truth": "The conflict of interest disclosure rule enforces a $50 gift cap.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Zero-tolerance harassment, workplace respect, conflict of interest disclosure ($50 gift cap), and anonymous ethics hotline escalation within 48 hours."
+    ],
+    "source_documents": ["01_Code_of_Conduct_and_Ethics.pdf"],
+    "policy_ids": ["POL-HR-001"]
+  },
+  {
+    "id": "GD-02",
+    "query_type": "single_hop_factual",
+    "question": "Within how many hours must an issue be escalated to the anonymous ethics hotline under POL-HR-001?",
+    "ground_truth": "Escalations to the anonymous ethics hotline must occur within 48 hours.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Zero-tolerance harassment, workplace respect, conflict of interest disclosure ($50 gift cap), and anonymous ethics hotline escalation within 48 hours."
+    ],
+    "source_documents": ["01_Code_of_Conduct_and_Ethics.pdf"],
+    "policy_ids": ["POL-HR-001"]
+  },
+  {
+    "id": "GD-03",
+    "query_type": "single_hop_factual",
+    "question": "Which department owns and maintains the Code of Conduct and Ethics policy?",
+    "ground_truth": "The HR & Governance leadership team owns, maintains, reviews exceptions quarterly, and publishes updates for the Code of Conduct and Ethics policy.",
+    "ground_truth_contexts": [
+      "Departmental Ownership: The HR & Governance leadership team maintains this policy, reviews exceptions quarterly, and publishes updates to the internal knowledge base."
+    ],
+    "source_documents": ["01_Code_of_Conduct_and_Ethics.pdf"],
+    "policy_ids": ["POL-HR-001"]
+  },
+  {
+    "id": "GD-04",
+    "query_type": "single_hop_factual",
+    "question": "Which days of the week are hybrid staff required to attend the hub under the Remote and Hybrid Work Policy?",
+    "ground_truth": "Hybrid staff are required to attend the hub 3 days per week from Tuesday to Thursday (Tue-Thu).",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Standard 3-day hub attendance (Tue-Thu) for hybrid staff, >=50 Mbps home internet requirement for remote staff, and core collaboration hours from 10:00 AM to 4:00 PM."
+    ],
+    "source_documents": ["02_Remote_and_Hybrid_Work_Policy.pdf"],
+    "policy_ids": ["POL-HR-002"]
+  },
+  {
+    "id": "GD-05",
+    "query_type": "single_hop_factual",
+    "question": "What is the minimum home internet speed required for remote staff at ApexNova Technologies?",
+    "ground_truth": "Remote staff are required to have a home internet speed of at least 50 Mbps (>=50 Mbps).",
+    "ground_truth_contexts": [
+      "Standard 3-day hub attendance (Tue-Thu) for hybrid staff, >=50 Mbps home internet requirement for remote staff, and core collaboration hours from 10:00 AM to 4:00 PM."
+    ],
+    "source_documents": ["02_Remote_and_Hybrid_Work_Policy.pdf"],
+    "policy_ids": ["POL-HR-002"]
+  },
+  {
+    "id": "GD-06",
+    "query_type": "single_hop_factual",
+    "question": "What are the mandatory core collaboration hours under POL-HR-002?",
+    "ground_truth": "Core collaboration hours are from 10:00 AM to 4:00 PM.",
+    "ground_truth_contexts": [
+      "Standard 3-day hub attendance (Tue-Thu) for hybrid staff, >=50 Mbps home internet requirement for remote staff, and core collaboration hours from 10:00 AM to 4:00 PM."
+    ],
+    "source_documents": ["02_Remote_and_Hybrid_Work_Policy.pdf"],
+    "policy_ids": ["POL-HR-002"]
+  },
+  {
+    "id": "GD-07",
+    "query_type": "single_hop_factual",
+    "question": "How many days of annual paid leave do personnel receive, and what is the maximum carryover limit?",
+    "ground_truth": "Personnel receive 22 days of annual paid leave, with a maximum carryover of 8 days into Q1.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: 22 days annual paid leave (max 8 days carryover to Q1), 12 days non-carryover sick leave, and mandatory medical certificate after 3 consecutive sick days."
+    ],
+    "source_documents": ["03_Annual_and_Sick_Leave_Policy.pdf"],
+    "policy_ids": ["POL-HR-003"]
+  },
+  {
+    "id": "GD-08",
+    "query_type": "single_hop_factual",
+    "question": "How many days of sick leave are provided annually, and can unused sick leave be carried over?",
+    "ground_truth": "12 days of sick leave are provided annually, and they are non-carryover.",
+    "ground_truth_contexts": [
+      "22 days annual paid leave (max 8 days carryover to Q1), 12 days non-carryover sick leave, and mandatory medical certificate after 3 consecutive sick days."
+    ],
+    "source_documents": ["03_Annual_and_Sick_Leave_Policy.pdf"],
+    "policy_ids": ["POL-HR-003"]
+  },
+  {
+    "id": "GD-09",
+    "query_type": "single_hop_factual",
+    "question": "When is a medical certificate mandatory for sick leave under POL-HR-003?",
+    "ground_truth": "A medical certificate is mandatory after 3 consecutive sick days.",
+    "ground_truth_contexts": [
+      "22 days annual paid leave (max 8 days carryover to Q1), 12 days non-carryover sick leave, and mandatory medical certificate after 3 consecutive sick days."
+    ],
+    "source_documents": ["03_Annual_and_Sick_Leave_Policy.pdf"],
+    "policy_ids": ["POL-HR-003"]
+  },
+  {
+    "id": "GD-10",
+    "query_type": "single_hop_factual",
+    "question": "How many weeks of paid parental leave are granted to primary caregivers versus secondary caregivers?",
+    "ground_truth": "Primary caregivers receive 26 weeks of paid leave, while secondary caregivers receive 6 weeks of paid leave.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: 26 weeks paid primary caregiver leave, 6 weeks secondary caregiver leave, 5 days bereavement leave, and 30-day advance notice requirement to People Operations."
+    ],
+    "source_documents": ["04_Parental_and_Family_Leave_Policy.pdf"],
+    "policy_ids": ["POL-HR-004"]
+  },
+  {
+    "id": "GD-11",
+    "query_type": "single_hop_factual",
+    "question": "How many days of bereavement leave are provided, and how much advance notice is required for parental and family leave?",
+    "ground_truth": "The policy provides 5 days of bereavement leave and requires a 30-day advance notice to People Operations.",
+    "ground_truth_contexts": [
+      "26 weeks paid primary caregiver leave, 6 weeks secondary caregiver leave, 5 days bereavement leave, and 30-day advance notice requirement to People Operations."
+    ],
+    "source_documents": ["04_Parental_and_Family_Leave_Policy.pdf"],
+    "policy_ids": ["POL-HR-004"]
+  },
+  {
+    "id": "GD-12",
+    "query_type": "single_hop_factual",
+    "question": "What are the authentication and password length requirements under the Information Security and Access Control policy?",
+    "ground_truth": "Personnel must use mandatory SSO with hardware or app MFA, and passwords stored in the enterprise vault must be at least 14 characters long.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Mandatory SSO + hardware/app MFA, minimum 14-character passwords in enterprise vault, BitLocker/FileVault disk encryption, and strict prohibition on unmanaged BYOD code access."
+    ],
+    "source_documents": ["05_Information_Security_and_Access_Control.pdf"],
+    "policy_ids": ["POL-SEC-005"]
+  },
+  {
+    "id": "GD-13",
+    "query_type": "single_hop_factual",
+    "question": "Which disk encryption technologies are required, and is BYOD allowed for accessing source code under POL-SEC-005?",
+    "ground_truth": "BitLocker or FileVault disk encryption is mandatory, and there is a strict prohibition on unmanaged BYOD code access.",
+    "ground_truth_contexts": [
+      "Mandatory SSO + hardware/app MFA, minimum 14-character passwords in enterprise vault, BitLocker/FileVault disk encryption, and strict prohibition on unmanaged BYOD code access."
+    ],
+    "source_documents": ["05_Information_Security_and_Access_Control.pdf"],
+    "policy_ids": ["POL-SEC-005"]
+  },
+  {
+    "id": "GD-14",
+    "query_type": "single_hop_factual",
+    "question": "What types of information are prohibited from being pasted into public LLMs under POL-SEC-006?",
+    "ground_truth": "Pasting customer PII, proprietary source code, or API keys into public LLMs is strictly prohibited.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Prohibition on pasting customer PII, proprietary source code, or API keys into public LLMs; mandatory use of Zero Data Retention (ZDR) enterprise AI endpoints."
+    ],
+    "source_documents": ["06_Generative_AI_and_LLM_Usage_Policy.pdf"],
+    "policy_ids": ["POL-SEC-006"]
+  },
+  {
+    "id": "GD-15",
+    "query_type": "single_hop_factual",
+    "question": "What type of AI endpoints must employees use according to the Generative AI and LLM Usage Policy?",
+    "ground_truth": "Employees are required to use Zero Data Retention (ZDR) enterprise AI endpoints.",
+    "ground_truth_contexts": [
+      "Prohibition on pasting customer PII, proprietary source code, or API keys into public LLMs; mandatory use of Zero Data Retention (ZDR) enterprise AI endpoints."
+    ],
+    "source_documents": ["06_Generative_AI_and_LLM_Usage_Policy.pdf"],
+    "policy_ids": ["POL-SEC-006"]
+  },
+  {
+    "id": "GD-16",
+    "query_type": "single_hop_factual",
+    "question": "What are the four data classification tiers defined in POL-LEG-007?",
+    "ground_truth": "The four data classification tiers are Public, Internal, Confidential, and Restricted.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Four-tier classification (Public, Internal, Confidential, Restricted), GDPR/CCPA/DPDP compliance, RBAC enforcement, and AES-256 encryption at rest for Tier 4 records."
+    ],
+    "source_documents": ["07_Data_Classification_and_Privacy_Policy.pdf"],
+    "policy_ids": ["POL-LEG-007"]
+  },
+  {
+    "id": "GD-17",
+    "query_type": "single_hop_factual",
+    "question": "What encryption standard and access control mechanisms are required under the Data Classification and Privacy Policy?",
+    "ground_truth": "The policy mandates Role-Based Access Control (RBAC) enforcement and AES-256 encryption at rest for Tier 4 records, alongside GDPR, CCPA, and DPDP compliance.",
+    "ground_truth_contexts": [
+      "Four-tier classification (Public, Internal, Confidential, Restricted), GDPR/CCPA/DPDP compliance, RBAC enforcement, and AES-256 encryption at rest for Tier 4 records."
+    ],
+    "source_documents": ["07_Data_Classification_and_Privacy_Policy.pdf"],
+    "policy_ids": ["POL-LEG-007"]
+  },
+  {
+    "id": "GD-18",
+    "query_type": "single_hop_factual",
+    "question": "How quickly must lost devices or phishing attempts be reported internally to the SOC?",
+    "ground_truth": "Lost devices or phishing attempts must be reported internally to the SOC within 1 hour.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Mandatory 1-hour internal reporting to SOC for lost devices or phishing, containment SLA of 4 hours, and Legal-led regulatory breach notification within 72 hours."
+    ],
+    "source_documents": ["08_Security_Incident_and_Breach_Response.pdf"],
+    "policy_ids": ["POL-SEC-008"]
+  },
+  {
+    "id": "GD-19",
+    "query_type": "single_hop_factual",
+    "question": "What are the containment SLA and regulatory breach notification timelines in POL-SEC-008?",
+    "ground_truth": "The security incident containment SLA is 4 hours, and Legal-led regulatory breach notification must occur within 72 hours.",
+    "ground_truth_contexts": [
+      "Mandatory 1-hour internal reporting to SOC for lost devices or phishing, containment SLA of 4 hours, and Legal-led regulatory breach notification within 72 hours."
+    ],
+    "source_documents": ["08_Security_Incident_and_Breach_Response.pdf"],
+    "policy_ids": ["POL-SEC-008"]
+  },
+  {
+    "id": "GD-20",
+    "query_type": "single_hop_factual",
+    "question": "What are the hotel nightly rate caps for Tier-1 and Tier-2 locations under the Travel and Expense Reimbursement Policy?",
+    "ground_truth": "The nightly hotel cap is $220/night for Tier-1 locations and $150/night for Tier-2 locations.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Economy flights under 6 hours, $220/night Tier-1 hotel cap, $150/night Tier-2 cap, $60/day meal per diem with itemized receipts, and 30-day submission deadline."
+    ],
+    "source_documents": ["09_Travel_and_Expense_Reimbursement_Policy.pdf"],
+    "policy_ids": ["POL-FIN-009"]
+  },
+  {
+    "id": "GD-21",
+    "query_type": "single_hop_factual",
+    "question": "What is the daily meal per diem, flight class rule, and expense submission deadline under POL-FIN-009?",
+    "ground_truth": "Employees must book economy flights for durations under 6 hours, have a $60/day meal per diem requiring itemized receipts, and must submit expenses within a 30-day deadline.",
+    "ground_truth_contexts": [
+      "Economy flights under 6 hours, $220/night Tier-1 hotel cap, $150/night Tier-2 cap, $60/day meal per diem with itemized receipts, and 30-day submission deadline."
+    ],
+    "source_documents": ["09_Travel_and_Expense_Reimbursement_Policy.pdf"],
+    "policy_ids": ["POL-FIN-009"]
+  },
+  {
+    "id": "GD-22",
+    "query_type": "single_hop_factual",
+    "question": "How much is the ergonomic equipment stipend, and when do employees become eligible for it?",
+    "ground_truth": "Employees receive a $400 one-time ergonomic equipment stipend after completing their 90-day probation period.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: $400 one-time ergonomic equipment stipend post-90-day probation, corporate laptop refresh every 36 months, and mandatory asset return within 5 days of offboarding."
+    ],
+    "source_documents": ["10_Home_Office_and_Equipment_Stipend.pdf"],
+    "policy_ids": ["POL-FIN-010"]
+  },
+  {
+    "id": "GD-23",
+    "query_type": "single_hop_factual",
+    "question": "How often are corporate laptops refreshed, and within how many days must assets be returned upon offboarding?",
+    "ground_truth": "Corporate laptops are refreshed every 36 months, and assets must be returned within 5 days of offboarding.",
+    "ground_truth_contexts": [
+      "$400 one-time ergonomic equipment stipend post-90-day probation, corporate laptop refresh every 36 months, and mandatory asset return within 5 days of offboarding."
+    ],
+    "source_documents": ["10_Home_Office_and_Equipment_Stipend.pdf"],
+    "policy_ids": ["POL-FIN-010"]
+  },
+  {
+    "id": "GD-24",
+    "query_type": "single_hop_factual",
+    "question": "What is the effective date and review cycle across all 10 ApexNova Technologies enterprise policies?",
+    "ground_truth": "All 10 policies have an effective date of January 15, 2026, and follow an Annual (Mandatory Audit) review cycle.",
+    "ground_truth_contexts": [
+      "Effective Date: January 15, 2026 | Review Cycle: Annual (Mandatory Audit)"
+    ],
+    "source_documents": [
+      "01_Code_of_Conduct_and_Ethics.pdf",
+      "02_Remote_and_Hybrid_Work_Policy.pdf",
+      "03_Annual_and_Sick_Leave_Policy.pdf",
+      "04_Parental_and_Family_Leave_Policy.pdf",
+      "05_Information_Security_and_Access_Control.pdf",
+      "06_Generative_AI_and_LLM_Usage_Policy.pdf",
+      "07_Data_Classification_and_Privacy_Policy.pdf",
+      "08_Security_Incident_and_Breach_Response.pdf",
+      "09_Travel_and_Expense_Reimbursement_Policy.pdf",
+      "10_Home_Office_and_Equipment_Stipend.pdf"
+    ],
+    "policy_ids": [
+      "POL-HR-001", "POL-HR-002", "POL-HR-003", "POL-HR-004", "POL-SEC-005",
+      "POL-SEC-006", "POL-LEG-007", "POL-SEC-008", "POL-FIN-009", "POL-FIN-010"
+    ]
+  },
+  {
+    "id": "GD-25",
+    "query_type": "single_hop_factual",
+    "question": "How long must approvals, audit logs, and signed attestations be retained in the compliance repository?",
+    "ground_truth": "All approvals, audit logs, and signed attestations must be stored in the immutable compliance repository for a minimum of 7 years.",
+    "ground_truth_contexts": [
+      "Record Retention | All approvals, audit logs, and signed attestations stored in immutable compliance repository. | Retained for minimum 7 years"
+    ],
+    "source_documents": ["01_Code_of_Conduct_and_Ethics.pdf"],
+    "policy_ids": ["POL-HR-001"]
+  },
+  {
+    "id": "GD-26",
+    "query_type": "single_hop_factual",
+    "question": "Who must approve a policy exception, and what is the SLA for reviewing exception requests?",
+    "ground_truth": "A written waiver is required from both the Department VP and Legal/Compliance prior to deviation, and exception requests have a 5 business days review SLA.",
+    "ground_truth_contexts": [
+      "Exception Approval | Written waiver required from Department VP and Legal/Compliance prior to deviation. | 5 business days review SLA"
+    ],
+    "source_documents": ["05_Information_Security_and_Access_Control.pdf"],
+    "policy_ids": ["POL-SEC-005"]
+  },
+  {
+    "id": "GD-27",
+    "query_type": "single_hop_factual",
+    "question": "Within how many days must direct reports complete annual policy acknowledgments after publication?",
+    "ground_truth": "Team leads must ensure direct reports complete annual policy acknowledgments within 14 calendar days of publication.",
+    "ground_truth_contexts": [
+      "Managerial Responsibility: Team leads must ensure direct reports complete annual policy acknowledgments within 14 calendar days of publication."
+    ],
+    "source_documents": ["02_Remote_and_Hybrid_Work_Policy.pdf"],
+    "policy_ids": ["POL-HR-002"]
+  },
+  {
+    "id": "GD-28",
+    "query_type": "single_hop_factual",
+    "question": "What is the initial triage SLA for suspected policy breaches reported via the Ethics Portal?",
+    "ground_truth": "Suspected breaches reported via the Ethics Portal or departmental escalation queue receive initial triage within 24 hours.",
+    "ground_truth_contexts": [
+      "Violation Escalation | Suspected breaches reported via Ethics Portal or departmental escalation queue. | Initial triage within 24 hours"
+    ],
+    "source_documents": ["01_Code_of_Conduct_and_Ethics.pdf"],
+    "policy_ids": ["POL-HR-001"]
+  },
+  {
+    "id": "GD-29",
+    "query_type": "single_hop_factual",
+    "question": "Do ApexNova Technologies policies apply to interns and third-party consultants?",
+    "ground_truth": "Yes, Covered Personnel includes all full-time employees, fixed-term contractors, interns, and third-party consultants operating on ApexNova systems or premises.",
+    "ground_truth_contexts": [
+      "Covered Personnel: Applies to all full-time employees, fixed-term contractors, interns, and third-party consultants operating on ApexNova systems or premises."
+    ],
+    "source_documents": ["01_Code_of_Conduct_and_Ethics.pdf"],
+    "policy_ids": ["POL-HR-001"]
+  },
+  {
+    "id": "GD-30",
+    "query_type": "single_hop_factual",
+    "question": "What disciplinary consequences can result from confirmed violations of ApexNova Technologies policies?",
+    "ground_truth": "Confirmed breaches result in corrective coaching, access revocation, formal written warnings, or termination of employment/contract depending on severity and intent.",
+    "ground_truth_contexts": [
+      "Confirmed breaches result in corrective coaching, access revocation, formal written warnings, or termination of employment/contract depending on severity and intent."
+    ],
+    "source_documents": ["06_Generative_AI_and_LLM_Usage_Policy.pdf"],
+    "policy_ids": ["POL-SEC-006"]
+  },
+  {
+    "id": "GD-31",
+    "query_type": "multi_hop",
+    "question": "If a remote developer loses their corporate laptop while traveling, what encryption standard must already be enabled on it, and within how many hours must they report the loss to the SOC?",
+    "ground_truth": "Under POL-SEC-005, the laptop must have BitLocker or FileVault disk encryption enabled, and under POL-SEC-008, the loss must be reported internally to the SOC within 1 hour.",
+    "ground_truth_contexts": [
+      "Mandatory SSO + hardware/app MFA, minimum 14-character passwords in enterprise vault, BitLocker/FileVault disk encryption, and strict prohibition on unmanaged BYOD code access.",
+      "Mandatory 1-hour internal reporting to SOC for lost devices or phishing, containment SLA of 4 hours, and Legal-led regulatory breach notification within 72 hours."
+    ],
+    "source_documents": [
+      "05_Information_Security_and_Access_Control.pdf",
+      "08_Security_Incident_and_Breach_Response.pdf"
+    ],
+    "policy_ids": ["POL-SEC-005", "POL-SEC-008"]
+  },
+  {
+    "id": "GD-32",
+    "query_type": "multi_hop",
+    "question": "An engineer pastes Tier 4 Restricted customer PII into a public LLM. Which policies were violated, what encryption should have protected that Tier 4 data at rest, and which two departments investigate the breach?",
+    "ground_truth": "This violates POL-SEC-006 (prohibition on pasting customer PII into public LLMs) and POL-LEG-007 (data classification and privacy compliance). Tier 4 records require AES-256 encryption at rest. Violations of POL-SEC-006 are investigated by AI Governance and Legal Counsel, while violations of POL-LEG-007 are investigated by Legal & Privacy and Legal Counsel.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Prohibition on pasting customer PII, proprietary source code, or API keys into public LLMs; mandatory use of Zero Data Retention (ZDR) enterprise AI endpoints.",
+      "Violations of POL-SEC-006 (Generative AI and LLM Usage Policy) are investigated objectively by AI Governance in coordination with Legal Counsel.",
+      "Core Policy Summary: Four-tier classification (Public, Internal, Confidential, Restricted), GDPR/CCPA/DPDP compliance, RBAC enforcement, and AES-256 encryption at rest for Tier 4 records.",
+      "Violations of POL-LEG-007 (Data Classification and Privacy Policy) are investigated objectively by Legal & Privacy in coordination with Legal Counsel."
+    ],
+    "source_documents": [
+      "06_Generative_AI_and_LLM_Usage_Policy.pdf",
+      "07_Data_Classification_and_Privacy_Policy.pdf"
+    ],
+    "policy_ids": ["POL-SEC-006", "POL-LEG-007"]
+  },
+  {
+    "id": "GD-33",
+    "query_type": "multi_hop",
+    "question": "A newly hired hybrid employee finishes their 90-day probation and wants to set up their home workspace. What stipend are they eligible for, what minimum internet speed do they need if working remotely, and which days must they still come into the hub?",
+    "ground_truth": "After completing their 90-day probation, they are eligible for a $400 one-time ergonomic equipment stipend (POL-FIN-010). Under POL-HR-002, they must attend the hub 3 days a week (Tuesday–Thursday) as a hybrid employee, and remote work requires at least 50 Mbps home internet.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: $400 one-time ergonomic equipment stipend post-90-day probation, corporate laptop refresh every 36 months, and mandatory asset return within 5 days of offboarding.",
+      "Core Policy Summary: Standard 3-day hub attendance (Tue-Thu) for hybrid staff, >=50 Mbps home internet requirement for remote staff, and core collaboration hours from 10:00 AM to 4:00 PM."
+    ],
+    "source_documents": [
+      "02_Remote_and_Hybrid_Work_Policy.pdf",
+      "10_Home_Office_and_Equipment_Stipend.pdf"
+    ],
+    "policy_ids": ["POL-HR-002", "POL-FIN-010"]
+  },
+  {
+    "id": "GD-34",
+    "query_type": "multi_hop",
+    "question": "If a remote employee travels to a Tier-1 city for a 4-hour flight to attend a company hub, what flight class must they book, what is their maximum nightly hotel and daily meal budget, and how long do they have to submit their receipts?",
+    "ground_truth": "Because the flight is under 6 hours, they must book Economy class. In a Tier-1 city, their hotel cap is $220/night and their meal per diem is $60/day (with itemized receipts). They must submit all expenses within 30 days.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Economy flights under 6 hours, $220/night Tier-1 hotel cap, $150/night Tier-2 cap, $60/day meal per diem with itemized receipts, and 30-day submission deadline."
+    ],
+    "source_documents": [
+      "02_Remote_and_Hybrid_Work_Policy.pdf",
+      "09_Travel_and_Expense_Reimbursement_Policy.pdf"
+    ],
+    "policy_ids": ["POL-HR-002", "POL-FIN-009"]
+  },
+  {
+    "id": "GD-35",
+    "query_type": "multi_hop",
+    "question": "Compare the advance notice and documentation deadlines for taking 4 consecutive sick days versus taking primary caregiver parental leave.",
+    "ground_truth": "For 4 consecutive sick days, a mandatory medical certificate is required after 3 consecutive sick days (POL-HR-003). For primary caregiver parental leave (26 weeks), a 30-day advance notice to People Operations is required (POL-HR-004).",
+    "ground_truth_contexts": [
+      "Core Policy Summary: 22 days annual paid leave (max 8 days carryover to Q1), 12 days non-carryover sick leave, and mandatory medical certificate after 3 consecutive sick days.",
+      "Core Policy Summary: 26 weeks paid primary caregiver leave, 6 weeks secondary caregiver leave, 5 days bereavement leave, and 30-day advance notice requirement to People Operations."
+    ],
+    "source_documents": [
+      "03_Annual_and_Sick_Leave_Policy.pdf",
+      "04_Parental_and_Family_Leave_Policy.pdf"
+    ],
+    "policy_ids": ["POL-HR-003", "POL-HR-004"]
+  },
+  {
+    "id": "GD-36",
+    "query_type": "multi_hop",
+    "question": "If a vendor offers a remote engineer a $75 gift card during a business trip in a Tier-2 city, can the engineer accept it, and how does that compare to their daily meal allowance?",
+    "ground_truth": "No, the engineer cannot accept the $75 gift card because POL-HR-001 enforces a strict $50 gift cap under conflict of interest disclosure rules. For meals during travel, POL-FIN-009 provides a $60/day meal per diem (alongside a $150/night Tier-2 hotel cap).",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Zero-tolerance harassment, workplace respect, conflict of interest disclosure ($50 gift cap), and anonymous ethics hotline escalation within 48 hours.",
+      "Core Policy Summary: Economy flights under 6 hours, $220/night Tier-1 hotel cap, $150/night Tier-2 cap, $60/day meal per diem with itemized receipts, and 30-day submission deadline."
+    ],
+    "source_documents": [
+      "01_Code_of_Conduct_and_Ethics.pdf",
+      "09_Travel_and_Expense_Reimbursement_Policy.pdf"
+    ],
+    "policy_ids": ["POL-HR-001", "POL-FIN-009"]
+  },
+  {
+    "id": "GD-37",
+    "query_type": "multi_hop",
+    "question": "If an employee is terminated for accessing proprietary source code on an unmanaged personal laptop and pasting it into a public AI chatbot, which two policies did they breach and within how many days must they return their corporate laptop?",
+    "ground_truth": "They breached POL-SEC-005 (strict prohibition on unmanaged BYOD code access) and POL-SEC-006 (prohibition on pasting proprietary source code into public LLMs). Upon offboarding/termination, they must return their corporate laptop within 5 days under POL-FIN-010.",
+    "ground_truth_contexts": [
+      "Mandatory SSO + hardware/app MFA, minimum 14-character passwords in enterprise vault, BitLocker/FileVault disk encryption, and strict prohibition on unmanaged BYOD code access.",
+      "Prohibition on pasting customer PII, proprietary source code, or API keys into public LLMs; mandatory use of Zero Data Retention (ZDR) enterprise AI endpoints.",
+      "$400 one-time ergonomic equipment stipend post-90-day probation, corporate laptop refresh every 36 months, and mandatory asset return within 5 days of offboarding."
+    ],
+    "source_documents": [
+      "05_Information_Security_and_Access_Control.pdf",
+      "06_Generative_AI_and_LLM_Usage_Policy.pdf",
+      "10_Home_Office_and_Equipment_Stipend.pdf"
+    ],
+    "policy_ids": ["POL-SEC-005", "POL-SEC-006", "POL-FIN-010"]
+  },
+  {
+    "id": "GD-38",
+    "query_type": "multi_hop",
+    "question": "Which policies in the corpus are owned by InfoSec, and what are their respective Policy IDs?",
+    "ground_truth": "InfoSec owns two policies in the corpus: Information Security and Access Control (POL-SEC-005) and Security Incident and Breach Response (POL-SEC-008).",
+    "ground_truth_contexts": [
+      "Policy ID: POL-SEC-005 | Department: InfoSec | Information Security and Access Control",
+      "Policy ID: POL-SEC-008 | Department: InfoSec | Security Incident and Breach Response"
+    ],
+    "source_documents": [
+      "05_Information_Security_and_Access_Control.pdf",
+      "08_Security_Incident_and_Breach_Response.pdf"
+    ],
+    "policy_ids": ["POL-SEC-005", "POL-SEC-008"]
+  },
+  {
+    "id": "GD-39",
+    "query_type": "multi_hop",
+    "question": "Which policies in the corpus are owned by Finance or Finance & IT, and what are their Policy IDs?",
+    "ground_truth": "Finance owns the Travel and Expense Reimbursement Policy (POL-FIN-009), and Finance & IT owns the Home Office and Equipment Stipend policy (POL-FIN-010).",
+    "ground_truth_contexts": [
+      "Policy ID: POL-FIN-009 | Department: Finance | Travel and Expense Reimbursement Policy",
+      "Policy ID: POL-FIN-010 | Department: Finance & IT | Home Office and Equipment Stipend"
+    ],
+    "source_documents": [
+      "09_Travel_and_Expense_Reimbursement_Policy.pdf",
+      "10_Home_Office_and_Equipment_Stipend.pdf"
+    ],
+    "policy_ids": ["POL-FIN-009", "POL-FIN-010"]
+  },
+  {
+    "id": "GD-40",
+    "query_type": "multi_hop",
+    "question": "Compare all escalation and reporting timelines across POL-HR-001 (Code of Conduct) and POL-SEC-008 (Security Incident Response).",
+    "ground_truth": "Under POL-HR-001, anonymous ethics hotline escalations must happen within 48 hours. Under POL-SEC-008, lost devices or phishing must be reported internally to the SOC within 1 hour, incidents have a 4-hour containment SLA, and Legal-led regulatory breach notification must occur within 72 hours. Both policies also share a 24-hour initial triage SLA for suspected breaches reported via the Ethics Portal or departmental queue.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Zero-tolerance harassment, workplace respect, conflict of interest disclosure ($50 gift cap), and anonymous ethics hotline escalation within 48 hours.",
+      "Core Policy Summary: Mandatory 1-hour internal reporting to SOC for lost devices or phishing, containment SLA of 4 hours, and Legal-led regulatory breach notification within 72 hours.",
+      "Violation Escalation | Suspected breaches reported via Ethics Portal or departmental escalation queue. | Initial triage within 24 hours"
+    ],
+    "source_documents": [
+      "01_Code_of_Conduct_and_Ethics.pdf",
+      "08_Security_Incident_and_Breach_Response.pdf"
+    ],
+    "policy_ids": ["POL-HR-001", "POL-SEC-008"]
+  },
+  {
+    "id": "GD-41",
+    "query_type": "edge_case_conditional",
+    "question": "If an employee carries over the maximum allowed 8 days of unused annual leave into Q1 and takes 2 consecutive sick days, how many total paid leave days do they have available that year and do they need a doctor's note?",
+    "ground_truth": "They would have 30 days of annual paid leave available (22 standard annual days plus the maximum 8 carryover days into Q1) along with 12 non-carryover sick days. They do not need a medical certificate for 2 consecutive sick days, as a medical certificate is only mandatory after 3 consecutive sick days.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: 22 days annual paid leave (max 8 days carryover to Q1), 12 days non-carryover sick leave, and mandatory medical certificate after 3 consecutive sick days."
+    ],
+    "source_documents": ["03_Annual_and_Sick_Leave_Policy.pdf"],
+    "policy_ids": ["POL-HR-003"]
+  },
+  {
+    "id": "GD-42",
+    "query_type": "edge_case_conditional",
+    "question": "Can a hybrid employee work remotely on Wednesday without attending the hub if their manager verbally agrees?",
+    "ground_truth": "No. Standard hub attendance for hybrid staff is mandatory on Tuesday through Thursday (Tue-Thu). Any deviation requires a formal written waiver from both the Department VP and Legal/Compliance (subject to a 5 business days review SLA), not just verbal manager approval.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Standard 3-day hub attendance (Tue-Thu) for hybrid staff, >=50 Mbps home internet requirement for remote staff, and core collaboration hours from 10:00 AM to 4:00 PM.",
+      "Exception Approval | Written waiver required from Department VP and Legal/Compliance prior to deviation. | 5 business days review SLA"
+    ],
+    "source_documents": ["02_Remote_and_Hybrid_Work_Policy.pdf"],
+    "policy_ids": ["POL-HR-002"]
+  },
+  {
+    "id": "GD-43",
+    "query_type": "edge_case_conditional",
+    "question": "If a contractor only works on ApexNova systems for 2 months, are they bound by the InfoSec and AI Usage policies, and are they eligible for the $400 home office stipend?",
+    "ground_truth": "Yes, they are bound by POL-SEC-005 and POL-SEC-006 because Covered Personnel explicitly includes fixed-term contractors and third-party consultants operating on ApexNova systems. However, the $400 ergonomic equipment stipend under POL-FIN-010 is only available post-90-day probation.",
+    "ground_truth_contexts": [
+      "Covered Personnel: Applies to all full-time employees, fixed-term contractors, interns, and third-party consultants operating on ApexNova systems or premises.",
+      "Core Policy Summary: $400 one-time ergonomic equipment stipend post-90-day probation, corporate laptop refresh every 36 months, and mandatory asset return within 5 days of offboarding."
+    ],
+    "source_documents": [
+      "05_Information_Security_and_Access_Control.pdf",
+      "06_Generative_AI_and_LLM_Usage_Policy.pdf",
+      "10_Home_Office_and_Equipment_Stipend.pdf"
+    ],
+    "policy_ids": ["POL-SEC-005", "POL-SEC-006", "POL-FIN-010"]
+  },
+  {
+    "id": "GD-44",
+    "query_type": "edge_case_conditional",
+    "question": "What happens if an employee submits a travel expense claim 35 days after their trip without itemized meal receipts?",
+    "ground_truth": "The submission violates POL-FIN-009, which requires itemized receipts for the $60/day meal per diem and enforces a 30-day submission deadline. Without an approved written waiver from the Department VP and Legal/Compliance, this constitutes a policy violation investigated by Finance and Legal Counsel.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Economy flights under 6 hours, $220/night Tier-1 hotel cap, $150/night Tier-2 cap, $60/day meal per diem with itemized receipts, and 30-day submission deadline.",
+      "Exception Approval | Written waiver required from Department VP and Legal/Compliance prior to deviation. | 5 business days review SLA",
+      "Violations of POL-FIN-009 (Travel and Expense Reimbursement Policy) are investigated objectively by Finance in coordination with Legal Counsel."
+    ],
+    "source_documents": ["09_Travel_and_Expense_Reimbursement_Policy.pdf"],
+    "policy_ids": ["POL-FIN-009"]
+  },
+  {
+    "id": "GD-45",
+    "query_type": "edge_case_conditional",
+    "question": "Can an engineer use a public LLM if they only paste internal API keys and no customer PII?",
+    "ground_truth": "No. POL-SEC-006 explicitly prohibits pasting customer PII, proprietary source code, OR API keys into public LLMs, and mandates the use of Zero Data Retention (ZDR) enterprise AI endpoints.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Prohibition on pasting customer PII, proprietary source code, or API keys into public LLMs; mandatory use of Zero Data Retention (ZDR) enterprise AI endpoints."
+    ],
+    "source_documents": ["06_Generative_AI_and_LLM_Usage_Policy.pdf"],
+    "policy_ids": ["POL-SEC-006"]
+  },
+  {
+    "id": "GD-46",
+    "query_type": "unanswerable_negative",
+    "question": "What is ApexNova Technologies' policy on business class upgrades for international flights longer than 6 hours?",
+    "ground_truth": "The provided policy documents state that economy flights are required for flights under 6 hours (POL-FIN-009), but they do not specify the cabin class rules or upgrade eligibility for flights lasting 6 hours or longer.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Economy flights under 6 hours, $220/night Tier-1 hotel cap, $150/night Tier-2 cap, $60/day meal per diem with itemized receipts, and 30-day submission deadline."
+    ],
+    "source_documents": ["09_Travel_and_Expense_Reimbursement_Policy.pdf"],
+    "policy_ids": ["POL-FIN-009"]
+  },
+  {
+    "id": "GD-47",
+    "query_type": "unanswerable_negative",
+    "question": "What are the encryption-at-rest requirements for Tier 1 (Public), Tier 2 (Internal), and Tier 3 (Confidential) data?",
+    "ground_truth": "While POL-LEG-007 defines the four classification tiers (Public, Internal, Confidential, Restricted) and specifies AES-256 encryption at rest for Tier 4 records, the documents do not specify encryption-at-rest requirements for Tiers 1, 2, or 3.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Four-tier classification (Public, Internal, Confidential, Restricted), GDPR/CCPA/DPDP compliance, RBAC enforcement, and AES-256 encryption at rest for Tier 4 records."
+    ],
+    "source_documents": ["07_Data_Classification_and_Privacy_Policy.pdf"],
+    "policy_ids": ["POL-LEG-007"]
+  },
+  {
+    "id": "GD-48",
+    "query_type": "unanswerable_negative",
+    "question": "Does ApexNova Technologies provide a monthly internet reimbursement stipend for remote employees who maintain >=50 Mbps home internet?",
+    "ground_truth": "The provided documents do not mention a monthly internet reimbursement stipend. POL-HR-002 requires >=50 Mbps home internet for remote staff, and POL-FIN-010 provides a $400 one-time ergonomic equipment stipend post-90-day probation, with no recurring internet allowance specified.",
+    "ground_truth_contexts": [],
+    "source_documents": [],
+    "policy_ids": []
+  },
+  {
+    "id": "GD-49",
+    "query_type": "unanswerable_negative",
+    "question": "What is the company's tuition reimbursement or conference sponsorship budget for full-time engineers?",
+    "ground_truth": "The provided policy documents do not contain any information regarding tuition reimbursement, educational stipends, or conference sponsorship budgets.",
+    "ground_truth_contexts": [],
+    "source_documents": [],
+    "policy_ids": []
+  },
+  {
+    "id": "GD-50",
+    "query_type": "unanswerable_negative",
+    "question": "Which cities are classified as Tier-1 versus Tier-2 for hotel reimbursement caps?",
+    "ground_truth": "While POL-FIN-009 sets a $220/night hotel cap for Tier-1 locations and a $150/night cap for Tier-2 locations, the provided policy documents do not list which specific cities belong to Tier-1 or Tier-2.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Economy flights under 6 hours, $220/night Tier-1 hotel cap, $150/night Tier-2 cap, $60/day meal per diem with itemized receipts, and 30-day submission deadline."
+    ],
+    "source_documents": ["09_Travel_and_Expense_Reimbursement_Policy.pdf"],
+    "policy_ids": ["POL-FIN-009"]
+  }
+]

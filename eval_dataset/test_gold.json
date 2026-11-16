@@ -1,0 +1,61 @@
+[
+    {
+        "id": "GD-01",
+        "query_type": "single_hop_factual",
+        "question": "What is the maximum monetary gift cap under the conflict of interest disclosure rules in the Code of Conduct and Ethics?",
+        "ground_truth": "The conflict of interest disclosure rule enforces a $50 gift cap.",
+        "ground_truth_contexts": [
+            "Core Policy Summary: Zero-tolerance harassment, workplace respect, conflict of interest disclosure ($50 gift cap), and anonymous ethics hotline escalation within 48 hours."
+        ],
+        "source_documents": [
+            "01_Code_of_Conduct_and_Ethics.pdf"
+        ],
+        "policy_ids": [
+            "POL-HR-001"
+        ]
+    },
+    {
+    "id": "GD-02",
+    "query_type": "single_hop_factual",
+    "question": "Within how many hours must an issue be escalated to the anonymous ethics hotline under POL-HR-001?",
+    "ground_truth": "Escalations to the anonymous ethics hotline must occur within 48 hours.",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Zero-tolerance harassment, workplace respect, conflict of interest disclosure ($50 gift cap), and anonymous ethics hotline escalation within 48 hours."
+    ],
+    "source_documents": ["01_Code_of_Conduct_and_Ethics.pdf"],
+    "policy_ids": ["POL-HR-001"]
+  },
+  {
+    "id": "GD-03",
+    "query_type": "single_hop_factual",
+    "question": "Which department owns and maintains the Code of Conduct and Ethics policy?",
+    "ground_truth": "The HR & Governance leadership team owns, maintains, reviews exceptions quarterly, and publishes updates for the Code of Conduct and Ethics policy.",
+    "ground_truth_contexts": [
+      "Departmental Ownership: The HR & Governance leadership team maintains this policy, reviews exceptions quarterly, and publishes updates to the internal knowledge base."
+    ],
+    "source_documents": ["01_Code_of_Conduct_and_Ethics.pdf"],
+    "policy_ids": ["POL-HR-001"]
+  },
+  {
+    "id": "GD-04",
+    "query_type": "single_hop_factual",
+    "question": "Which days of the week are hybrid staff required to attend the hub under the Remote and Hybrid Work Policy?",
+    "ground_truth": "Hybrid staff are required to attend the hub 3 days per week from Tuesday to Thursday (Tue-Thu).",
+    "ground_truth_contexts": [
+      "Core Policy Summary: Standard 3-day hub attendance (Tue-Thu) for hybrid staff, >=50 Mbps home internet requirement for remote staff, and core collaboration hours from 10:00 AM to 4:00 PM."
+    ],
+    "source_documents": ["02_Remote_and_Hybrid_Work_Policy.pdf"],
+    "policy_ids": ["POL-HR-002"]
+  },
+  {
+    "id": "GD-05",
+    "query_type": "single_hop_factual",
+    "question": "What is the minimum home internet speed required for remote staff at ApexNova Technologies?",
+    "ground_truth": "Remote staff are required to have a home internet speed of at least 50 Mbps (>=50 Mbps).",
+    "ground_truth_contexts": [
+      "Standard 3-day hub attendance (Tue-Thu) for hybrid staff, >=50 Mbps home internet requirement for remote staff, and core collaboration hours from 10:00 AM to 4:00 PM."
+    ],
+    "source_documents": ["02_Remote_and_Hybrid_Work_Policy.pdf"],
+    "policy_ids": ["POL-HR-002"]
+  }
+]

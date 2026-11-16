@@ -1,6 +1,8 @@
 docs/
 chroma_db/
 qdrant_storage/
+eval_dataset/golden_source/
+.deepeval/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
