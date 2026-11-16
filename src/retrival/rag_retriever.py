@@ -337,25 +337,35 @@ class RAGRetriever:
 # --- Example Usage ---
 if __name__ == "__main__":
     from src.ingestion.chroma_store import VectorDBManager
+    from src.LLM.litellm_client import LiteLLMClient
+    import os
+
+    # 1. Initialize LiteLLM (swap model string anytime: "gpt-4o-mini", "groq/llama-3.3-70b-versatile", "ollama/llama3.2", etc.)
+    llm = LiteLLMClient(
+        model="groq/openai/gpt-oss-20b",
+        api_key=os.getenv("GROQ_API_KEY", None),
+    )
 
     db = VectorDBManager(backend="chroma", collection_name="rag_policies")
-    retriever = RAGRetriever(vector_db=db)
+    retriever = RAGRetriever(vector_db=db,llm_fn=llm)
 
     query = "What is the Governance Roles in the cumpany?"
 
     # 1. Hybrid Search (Dense + BM25 RRF)
-    hybrid_hits = retriever.retrieve(query, strategy="hybrid", top_k=3)
+    # hybrid_hits = retriever.retrieve(query, strategy="hybrid", top_k=3)
 
-    # 2. Hybrid + Cross-Encoder Reranking (Highest Accuracy)
-    reranked_hits = retriever.retrieve(query, strategy="rerank", top_k=3)
+    # # 2. Hybrid + Cross-Encoder Reranking (Highest Accuracy)
+    # reranked_hits = retriever.retrieve(query, strategy="rerank", top_k=3)
 
-    # 3. MMR Diverse Search with Metadata Filter
-    diverse_hits = retriever.retrieve(
-        query,
-        strategy="mmr",
-        top_k=3,
-        filters={"source_file": "03_Annual_and_Sick_Leave_Policy.pdf"},
-    )
+    # # 3. MMR Diverse Search with Metadata Filter
+    # diverse_hits = retriever.retrieve(
+    #     query,
+    #     strategy="mmr",
+    #     top_k=3,
+    #     filters={"source_file": "03_Annual_and_Sick_Leave_Policy.pdf"},
+    # )
+
+    reranked_hits = retriever.retrieve(query, strategy="hyde", top_k=3)
 
     for h in reranked_hits:
         print(f"[Score: {h['score']}] {h['metadata'].get('source_file')} -> {h['text'][:150]}...")

@@ -1,0 +1,262 @@
+[
+  {
+    "id": "GD-01",
+    "question": "What is the maximum monetary gift cap under the conflict of interest disclosure rules in the Code of Conduct and Ethics?",
+    "ground_truth": "The conflict of interest disclosure rule enforces a $50 gift cap.",
+    "retrieval_config": {
+      "strategy": "sparse",
+      "top_k": 3
+    },
+    "retrieved_hits": [
+      {
+        "text": "## 3. Operational Rules, Thresholds &amp; SLAs  \n| Control Area         | Mandatory Requirement                                                                                                                                  | SLA / Enforcement Metric          |\n|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|\n| Primary Rule         | Zero-tolerance harassment, workplace respect, conflict of interest disclosure ($50 gift cap), and anonymous ethics hotline escalation within 48 hours. | 100% compliance audited quarterly |",
+        "metadata": {
+          "chunk_index": 3,
+          "doc_uuid": "06ab7bcc-6d5f-6151-7f62-e8a7a8587d50",
+          "chunk_strategy": "markdown",
+          "doc_hash": "ca3402dc605ab086",
+          "department": "HR",
+          "source_file": "01_Code_of_Conduct_and_Ethics.pdf"
+        },
+        "score": 14.215
+      },
+      {
+        "text": "## 1. Purpose &amp; Executive Mandate  \nThis policy establishes binding operational, legal, and behavioral standards for Code of Conduct and Ethics across all ApexNova Technologies offices, engineering hubs, and remote work environments. Adherence protects organizational integrity, customer trust, and regulatory compliance.  \nCore Policy Summary: Zero-tolerance harassment, workplace respect, conflict of interest disclosure ($50 gift cap), and anonymous ethics hotline escalation within 48 hours.",
+        "metadata": {
+          "department": "HR",
+          "chunk_index": 1,
+          "doc_uuid": "06ab7bcc-6d5f-6151-7f62-e8a7a8587d50",
+          "source_file": "01_Code_of_Conduct_and_Ethics.pdf",
+          "doc_hash": "ca3402dc605ab086",
+          "chunk_strategy": "markdown"
+        },
+        "score": 13.877
+      },
+      {
+        "text": "## 2. Scope &amp; Governance Roles  \n- Covered Personnel: Applies to all full-time employees, fixed-term contractors, interns, and third-party consultants operating on ApexNova systems or premises.\n- Departmental Ownership: The Human Resources leadership team maintains this policy, reviews exceptions quarterly, and publishes updates to the internal knowledge base.\n- Managerial Responsibility: Team leads must ensure direct reports complete annual policy acknowledgments within 14 calendar days of publication.",
+        "metadata": {
+          "chunk_index": 2,
+          "doc_uuid": "bbd4b580-3630-01f4-4e11-10816f7042eb",
+          "department": "HR",
+          "doc_hash": "88f21037d34e0126",
+          "source_file": "03_Annual_and_Sick_Leave_Policy.pdf",
+          "chunk_strategy": "markdown"
+        },
+        "score": 6.9197
+      }
+    ],
+    "evaluation": {
+      "score": 5,
+      "is_supported": true,
+      "reason": "Both Chunk 1 and Chunk 2 explicitly state the conflict of interest disclosure rule includes a $50 gift cap."
+    }
+  },
+  {
+    "id": "GD-02",
+    "question": "Within how many hours must an issue be escalated to the anonymous ethics hotline under POL-HR-001?",
+    "ground_truth": "Escalations to the anonymous ethics hotline must occur within 48 hours.",
+    "retrieval_config": {
+      "strategy": "sparse",
+      "top_k": 3
+    },
+    "retrieved_hits": [
+      {
+        "text": "## 3. Operational Rules, Thresholds &amp; SLAs  \n| Control Area         | Mandatory Requirement                                                                                                                                  | SLA / Enforcement Metric          |\n|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|\n| Primary Rule         | Zero-tolerance harassment, workplace respect, conflict of interest disclosure ($50 gift cap), and anonymous ethics hotline escalation within 48 hours. | 100% compliance audited quarterly |",
+        "metadata": {
+          "doc_uuid": "06ab7bcc-6d5f-6151-7f62-e8a7a8587d50",
+          "department": "HR",
+          "source_file": "01_Code_of_Conduct_and_Ethics.pdf",
+          "chunk_strategy": "markdown",
+          "chunk_index": 3,
+          "doc_hash": "ca3402dc605ab086"
+        },
+        "score": 6.0152
+      },
+      {
+        "text": "## 1. Purpose &amp; Executive Mandate  \nThis policy establishes binding operational, legal, and behavioral standards for Code of Conduct and Ethics across all ApexNova Technologies offices, engineering hubs, and remote work environments. Adherence protects organizational integrity, customer trust, and regulatory compliance.  \nCore Policy Summary: Zero-tolerance harassment, workplace respect, conflict of interest disclosure ($50 gift cap), and anonymous ethics hotline escalation within 48 hours.",
+        "metadata": {
+          "doc_uuid": "06ab7bcc-6d5f-6151-7f62-e8a7a8587d50",
+          "chunk_strategy": "markdown",
+          "department": "HR",
+          "doc_hash": "ca3402dc605ab086",
+          "chunk_index": 1,
+          "source_file": "01_Code_of_Conduct_and_Ethics.pdf"
+        },
+        "score": 5.1814
+      },
+      {
+        "text": "## 2. Scope &amp; Governance Roles  \n- Covered Personnel: Applies to all full-time employees, fixed-term contractors, interns, and third-party consultants operating on ApexNova systems or premises. \u00b7\n- Departmental Ownership: The HR &amp; Operations leadership team maintains this policy, reviews exceptions quarterly, and publishes updates to the internal knowledge base. \u00b7\n- Managerial Responsibility: Team leads must ensure direct reports complete annual policy acknowledgments within 14 calendar days of publication. \u00b7",
+        "metadata": {
+          "chunk_index": 2,
+          "chunk_strategy": "markdown",
+          "doc_uuid": "8f29ec4e-f316-2d66-c02d-afe0420c950f",
+          "doc_hash": "d4569b9c0ab47978",
+          "source_file": "02_Remote_and_Hybrid_Work_Policy.pdf",
+          "department": "HR"
+        },
+        "score": 4.1367
+      }
+    ],
+    "evaluation": {
+      "score": 5,
+      "is_supported": true,
+      "reason": "Both Chunk 1 and Chunk 2 explicitly state that anonymous ethics hotline escalations must occur within 48 hours."
+    }
+  },
+  {
+    "id": "GD-03",
+    "question": "Which department owns and maintains the Code of Conduct and Ethics policy?",
+    "ground_truth": "The HR & Governance leadership team owns, maintains, reviews exceptions quarterly, and publishes updates for the Code of Conduct and Ethics policy.",
+    "retrieval_config": {
+      "strategy": "sparse",
+      "top_k": 3
+    },
+    "retrieved_hits": [
+      {
+        "text": "## Code of Conduct and Ethics  \nEnterprise Governance &amp; Operational Standard - RAG Corpus Document #01  \n| Policy ID     | POL-HR-001                                    | Effective Date   | January 15, 2026              |\n|---------------|-----------------------------------------------|------------------|-------------------------------|\n| Department    | HR & Governance                               | Review Cycle     | Annual (Mandatory Audit)      |\n| Applicability | All Full-Time, Part-Time & Contract Personnel | Compliance Tier  | Mandatory Enterprise Standard |",
+        "metadata": {
+          "department": "HR",
+          "source_file": "01_Code_of_Conduct_and_Ethics.pdf",
+          "chunk_index": 0,
+          "doc_uuid": "06ab7bcc-6d5f-6151-7f62-e8a7a8587d50",
+          "doc_hash": "ca3402dc605ab086",
+          "chunk_strategy": "markdown"
+        },
+        "score": 6.1953
+      },
+      {
+        "text": "## 1. Purpose &amp; Executive Mandate  \nThis policy establishes binding operational, legal, and behavioral standards for Code of Conduct and Ethics across all ApexNova Technologies offices, engineering hubs, and remote work environments. Adherence protects organizational integrity, customer trust, and regulatory compliance.  \nCore Policy Summary: Zero-tolerance harassment, workplace respect, conflict of interest disclosure ($50 gift cap), and anonymous ethics hotline escalation within 48 hours.",
+        "metadata": {
+          "doc_uuid": "06ab7bcc-6d5f-6151-7f62-e8a7a8587d50",
+          "doc_hash": "ca3402dc605ab086",
+          "source_file": "01_Code_of_Conduct_and_Ethics.pdf",
+          "department": "HR",
+          "chunk_index": 1,
+          "chunk_strategy": "markdown"
+        },
+        "score": 5.7227
+      },
+      {
+        "text": "## 4. Non-Compliance &amp; Enforcement  \nViolations of POL-HR-001 (Code of Conduct and Ethics) are investigated objectively by HR &amp; Governance in coordination with Legal Counsel. Confirmed breaches result in corrective coaching, access revocation, formal written warnings, or termination of employment/contract depending on severity and intent.  \nDocument Control: POL-HR-001 \u00b7 ApexNova Technologies Enterprise Policy Corpus (Document 01 of 25) \u00b7 Classification: Internal Reference Dataset",
+        "metadata": {
+          "doc_uuid": "06ab7bcc-6d5f-6151-7f62-e8a7a8587d50",
+          "department": "HR",
+          "chunk_index": 5,
+          "doc_hash": "ca3402dc605ab086",
+          "chunk_strategy": "markdown",
+          "source_file": "01_Code_of_Conduct_and_Ethics.pdf"
+        },
+        "score": 5.0321
+      }
+    ],
+    "evaluation": {
+      "score": 1,
+      "is_supported": false,
+      "reason": "The context lists HR & Governance as department and annual review cycle, but does not state the leadership team owns, maintains, reviews quarterly, or publishes updates for the policy."
+    }
+  },
+  {
+    "id": "GD-04",
+    "question": "Which days of the week are hybrid staff required to attend the hub under the Remote and Hybrid Work Policy?",
+    "ground_truth": "Hybrid staff are required to attend the hub 3 days per week from Tuesday to Thursday (Tue-Thu).",
+    "retrieval_config": {
+      "strategy": "sparse",
+      "top_k": 3
+    },
+    "retrieved_hits": [
+      {
+        "text": "## 1. Purpose &amp; Executive Mandate  \nThis policy establishes binding operational, legal, and behavioral standards for Remote and Hybrid Work Policy across all ApexNova Technologies offices, engineering hubs, and remote work environments. Adherence protects organizational integrity, customer trust, and regulatory compliance.  \nCore Policy Summary: Standard 3-day hub attendance (Tue-Thu) for hybrid staff, &gt;=50 Mbps home internet requirement for remote staff, and core collaboration hours from 10:00 AM to 4:00 PM.",
+        "metadata": {
+          "doc_hash": "d4569b9c0ab47978",
+          "chunk_strategy": "markdown",
+          "chunk_index": 1,
+          "department": "HR",
+          "doc_uuid": "8f29ec4e-f316-2d66-c02d-afe0420c950f",
+          "source_file": "02_Remote_and_Hybrid_Work_Policy.pdf"
+        },
+        "score": 10.3
+      },
+      {
+        "text": "## 3. Operational Rules, Thresholds &amp; SLAs  \n| Control Area         | Mandatory Requirement                                                                                                                                                  | SLA / Enforcement Metric          |\n|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|\n| Primary Rule         | Standard 3-day hub attendance (Tue-Thu) for hybrid staff, >=50 Mbps home internet requirement for remote staff, and core collaboration hours from 10:00 AM to 4:00 PM. | 100% compliance audited quarterly |",
+        "metadata": {
+          "department": "HR",
+          "doc_uuid": "8f29ec4e-f316-2d66-c02d-afe0420c950f",
+          "doc_hash": "d4569b9c0ab47978",
+          "source_file": "02_Remote_and_Hybrid_Work_Policy.pdf",
+          "chunk_index": 3,
+          "chunk_strategy": "markdown"
+        },
+        "score": 8.4006
+      },
+      {
+        "text": "## 2. Scope &amp; Governance Roles  \n- Covered Personnel: Applies to all full-time employees, fixed-term contractors, interns, and third-party consultants operating on ApexNova systems or premises.\n- Departmental Ownership: The Human Resources leadership team maintains this policy, reviews exceptions quarterly, and publishes updates to the internal knowledge base.\n- Managerial Responsibility: Team leads must ensure direct reports complete annual policy acknowledgments within 14 calendar days of publication.",
+        "metadata": {
+          "doc_hash": "88f21037d34e0126",
+          "source_file": "03_Annual_and_Sick_Leave_Policy.pdf",
+          "doc_uuid": "bbd4b580-3630-01f4-4e11-10816f7042eb",
+          "department": "HR",
+          "chunk_strategy": "markdown",
+          "chunk_index": 2
+        },
+        "score": 7.8352
+      }
+    ],
+    "evaluation": {
+      "score": 5,
+      "is_supported": true,
+      "reason": "Both Chunk 1 and Chunk 2 explicitly state the requirement of a standard 3\u2011day hub attendance (Tue\u2011Thu) for hybrid staff."
+    }
+  },
+  {
+    "id": "GD-05",
+    "question": "What is the minimum home internet speed required for remote staff at ApexNova Technologies?",
+    "ground_truth": "Remote staff are required to have a home internet speed of at least 50 Mbps (>=50 Mbps).",
+    "retrieval_config": {
+      "strategy": "sparse",
+      "top_k": 3
+    },
+    "retrieved_hits": [
+      {
+        "text": "## 1. Purpose &amp; Executive Mandate  \nThis policy establishes binding operational, legal, and behavioral standards for Remote and Hybrid Work Policy across all ApexNova Technologies offices, engineering hubs, and remote work environments. Adherence protects organizational integrity, customer trust, and regulatory compliance.  \nCore Policy Summary: Standard 3-day hub attendance (Tue-Thu) for hybrid staff, &gt;=50 Mbps home internet requirement for remote staff, and core collaboration hours from 10:00 AM to 4:00 PM.",
+        "metadata": {
+          "doc_hash": "d4569b9c0ab47978",
+          "department": "HR",
+          "chunk_index": 1,
+          "chunk_strategy": "markdown",
+          "doc_uuid": "8f29ec4e-f316-2d66-c02d-afe0420c950f",
+          "source_file": "02_Remote_and_Hybrid_Work_Policy.pdf"
+        },
+        "score": 8.2272
+      },
+      {
+        "text": "## 3. Operational Rules, Thresholds &amp; SLAs  \n| Control Area         | Mandatory Requirement                                                                                                                                                  | SLA / Enforcement Metric          |\n|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|\n| Primary Rule         | Standard 3-day hub attendance (Tue-Thu) for hybrid staff, >=50 Mbps home internet requirement for remote staff, and core collaboration hours from 10:00 AM to 4:00 PM. | 100% compliance audited quarterly |",
+        "metadata": {
+          "source_file": "02_Remote_and_Hybrid_Work_Policy.pdf",
+          "department": "HR",
+          "doc_uuid": "8f29ec4e-f316-2d66-c02d-afe0420c950f",
+          "chunk_index": 3,
+          "doc_hash": "d4569b9c0ab47978",
+          "chunk_strategy": "markdown"
+        },
+        "score": 8.1405
+      },
+      {
+        "text": "| Exception Approval   | Written waiver required from Department VP and Legal/Compliance prior to deviation.                                                                    | 5 business days review SLA        |\n| Record Retention     | All approvals, audit logs, and signed attestations stored in immutable compliance repository.                                                          | Retained for minimum 7 years      |\n| Violation Escalation | Suspected breaches reported via Ethics Portal or departmental escalation queue.                                                                        | Initial triage within 24 hours    |",
+        "metadata": {
+          "department": "HR",
+          "chunk_strategy": "markdown",
+          "chunk_index": 4,
+          "doc_uuid": "06ab7bcc-6d5f-6151-7f62-e8a7a8587d50",
+          "source_file": "01_Code_of_Conduct_and_Ethics.pdf",
+          "doc_hash": "ca3402dc605ab086"
+        },
+        "score": 4.3221
+      }
+    ],
+    "evaluation": {
+      "score": 5,
+      "is_supported": true,
+      "reason": "Both chunks explicitly state a >=50\u202fMbps home internet requirement for remote staff, matching the ground truth."
+    }
+  }
+]

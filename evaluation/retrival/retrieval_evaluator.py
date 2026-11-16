@@ -8,8 +8,15 @@ from pydantic import BaseModel, Field
 from src.ingestion.chroma_store import VectorDBManager
 from src.retrival.rag_retriever import RAGRetriever
 from evaluation.retrival.html_reporter import generate_html_report
+import os
+from src.LLM.litellm_client import LiteLLMClient
 
 load_dotenv()
+
+llm_func = LiteLLMClient(
+    model="groq/openai/gpt-oss-20b",
+    api_key=os.getenv("GROQ_API_KEY", None),
+)
 
 # 1. Schema
 class EvaluationResult(BaseModel):
@@ -72,7 +79,7 @@ def run_evaluation_pipeline(
     # Initialize your VectorDB and Retriever ONCE before the loop
     print("Initializing VectorDB & Hybrid Retriever...")
     db = VectorDBManager(backend="chroma", collection_name="rag_policies")
-    retriever = RAGRetriever(vector_db=db)
+    retriever = RAGRetriever(vector_db=db, llm_fn=llm_func)
 
     # Load golden dataset
     data = json.loads(Path(golden_path).read_text(encoding="utf-8"))
@@ -132,6 +139,7 @@ def run_evaluation_pipeline(
     print(f"Average Score : {avg_score:.2f} / 5.00")
     print(f"Pass Rate     : {pass_rate:.1f}%")
     print(f"Saved Report  : {output_path}")
+
 
 if __name__ == "__main__":
     run_evaluation_pipeline(
