@@ -184,15 +184,15 @@ The system supports experiments across different retrieval strategies using a co
 
 **Configuration:** `top_k = 3`
 
-| Strategy | Hit Rate@3 | MRR@3 | Context Precision | Faithfulness | Answer Relevancy | Avg. Latency |
-|---|---:|---:|---:|---:|---:|---:|
-| BM25 | 80% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
-| Dense | 40% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
-| Hybrid | 80% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
-| HyDE + Dense | 80% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
-| HyDE | 40% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
-| MMR | 80% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
-| Multu_Quary | 80% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
+| Strategy | Hit Rate@3 | MRR@3 | Context Precision | Faithfulness | Answer Relevancy | Hallucinations | Avg. Latency |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| BM25 | 80% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
+| Dense | 40% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
+| Hybrid | 80% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
+| HyDE + Dense | 80% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
+| HyDE | 40% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
+| MMR | 80% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
+| Multu_Quary | 80% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
 
 > Replace the placeholders with actual evaluation outputs. Include the dataset size, model configuration, and hardware details when publishing benchmark results.
 
