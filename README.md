@@ -194,7 +194,6 @@ The system supports experiments across different retrieval strategies using a co
 | MMR | 80% | 75% | 95% | 95% | 95% | 10% | [Pending] |
 | Multu_Quary | 80% | 75% | 95% | 95% | 95% | 10% | [Pending] |
 
-> Replace the placeholders with actual evaluation outputs. Include the dataset size, model configuration, and hardware details when publishing benchmark results.
 
 ### Evaluation Objectives
 
