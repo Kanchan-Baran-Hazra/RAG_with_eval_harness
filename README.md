@@ -188,7 +188,7 @@ The system supports experiments across different retrieval strategies using a co
 |---|---:|---:|---:|---:|---:|---:|---:|
 | BM25 | 80% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
 | Dense | 40% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
-| Hybrid | 80% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
+| Hybrid | 80% | 75% | 95% | 95% | 95% | 10% | [Pending] |
 | HyDE + Dense | 80% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
 | HyDE | 40% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
 | MMR | 80% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
