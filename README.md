@@ -186,11 +186,11 @@ The system supports experiments across different retrieval strategies using a co
 
 | Strategy | Hit Rate@3 | MRR@3 | Context Precision | Faithfulness | Answer Relevancy | Hallucinations | Avg. Latency |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| BM25 | 40% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
+| BM25 | 40% | 45% | 50% | 53% | 50% | 15% | [Pending] |
 | Dense | 80% | 75% | 95% | 95% | 95% | 10% | [Pending] |
 | Hybrid | 80% | 75% | 95% | 95% | 95% | 10% | [Pending] |
-| HyDE + Dense | 80% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
-| HyDE | 40% | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] | [Pending] |
+| HyDE + Dense | 80% | 70% | 85% | 75% | 85% | 10% | [Pending] |
+| HyDE | 40% | 45% | 50% | 53% | 50% | 15% | [Pending] |
 | MMR | 80% | 75% | 95% | 95% | 95% | 10% | [Pending] |
 | Multu_Quary | 80% | 75% | 95% | 95% | 95% | 10% | [Pending] |
 
