@@ -12,13 +12,13 @@ llm = LiteLLMClient(
 
 # 2. Wire into Retriever (enables Multi-Query & HyDE) and Generator
 db = VectorDBManager(backend="chroma", collection_name="rag_policies")
-retriever = RAGRetriever(vector_db=db, llm_fn=llm)
+# retriever = RAGRetriever(vector_db=db, llm_fn=llm)                  # for local call
 generator = RAGGenerator(llm_fn=llm)
 
-def _run(query: str,strategy: str = "rerank", top_k: int = 3) -> str:
+def _run(query: str,strategy: str = "rerank", top_k: int = 3,context_chunks: list = None) -> str:
 
-    chunks = retriever.retrieve(query, strategy=strategy, top_k=top_k)
-    result = generator.generate(query, chunks)
+    # chunks = retriever.retrieve(query, strategy=strategy, top_k=top_k)
+    result = generator.generate(query, context_chunks)
     return result
 
 
